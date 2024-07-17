@@ -1,0 +1,71 @@
+name: tedza
+description: "Flutter Test ecommerce app"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  #UI
+  cupertino_icons: ^1.0.6
+  intl: ^0.19.0
+  font_awesome_flutter: ^10.7.0
+  iconly: ^1.0.1
+  carousel_slider: ^4.2.1
+  google_fonts: ^6.2.1
+
+  #State Management
+  provider: ^6.1.2
+
+  #Secured Storage
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.2.3
+
+  #Network
+  http: ^1.2.1
+  dartz: ^0.10.1
+  connectivity_plus: ^6.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  
+  flutter_lints: ^3.0.0
+
+
+flutter:
+
+  
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+     - assets/images/
+     - assets/icons/
+     - assets/languages/
+     - assets/fonts/
+
+  # To add custom fonts to your application, add a fonts section here,
+  fonts:
+     - family: Poppins
+       fonts:
+         - asset: assets/fonts/poppins-light.ttf
+           weight: 100
+         - asset: assets/fonts/poppins-regular.ttf
+           weight: 300
+         - asset: assets/fonts/poppins-medium.ttf
+           weight: 500
+         - asset: assets/fonts/poppins-bold.ttf
+           weight: 700
+     - family: IconlyBold
+       fonts:
+        - asset: assets/fonts/IconlyBold.ttf

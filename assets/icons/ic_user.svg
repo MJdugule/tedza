@@ -1,0 +1,41 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    id="vector">
+    <path
+        id="path"
+        d="M 377.565 31.565 L 346 0 L 316 30 L 286 0 L 256 30 L 226 0 L 196 30 L 166 0 L 134.435 31.565 L 91 0.135 L 91 512 L 421 512 L 421 0.135 L 377.565 31.565 Z M 391 482 L 121 482 L 121 58.875 L 137.565 70.862 L 166 42.427 L 196 72.427 L 226 42.427 L 256 72.427 L 286 42.427 L 316 72.427 L 346 42.427 L 374.435 70.862 L 391 58.875 L 391 482 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_1"
+        d="M 151 102 L 361 102 L 361 132 L 151 132 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_2"
+        d="M 151 182 L 301 182 L 301 212 L 151 212 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_3"
+        d="M 331 242 L 361 242 L 361 272 L 331 272 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_4"
+        d="M 331 302 L 361 302 L 361 332 L 331 332 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_5"
+        d="M 151 242 L 301 242 L 301 272 L 151 272 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_6"
+        d="M 151 302 L 301 302 L 301 332 L 151 332 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_7"
+        d="M 331 422 L 361 422 L 361 452 L 331 452 Z"
+        fill="#ffffff"/>
+    <path
+        id="path_8"
+        d="M 151 362 L 361 362 L 361 392 L 151 392 Z"
+        fill="#ffffff"/>
+</svg>
