@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:tedza/constants/constant.dart';
 import 'package:tedza/res/widget/app_spinner.dart';
@@ -6,7 +7,9 @@ import 'package:tedza/res/widget/empty_state_widget.dart';
 import 'package:tedza/res/widget/header.dart';
 import 'package:tedza/res/widget/search_bar.dart';
 import 'package:tedza/res/widget/shop_items.dart';
+import 'package:tedza/viewmodels/authentication_viewmodel.dart';
 import 'package:tedza/viewmodels/shop_viewmodel.dart';
+import 'package:tedza/views/shop/favourite_screen.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({super.key});
@@ -23,26 +26,15 @@ class _ShopScreenState extends State<ShopScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final shopViewModel = Provider.of<ShopViewModel>(context, listen: false);
       shopViewModel.getAllShopProduct().then((value) {
-        if (value != false) {
-          
-        }
+        if (value != false) {}
       });
-      
     });
     super.initState();
   }
 
-
   @override
   void dispose() {
     searchController.dispose();
-    //   //  WidgetsBinding.instance.addPostFrameCallback((_) {
-    //  if (!mounted) {
-    //    final shopProvider = Provider.of<ShopViewModel>(context, listen: false);
-    //     shopProvider.clearSearchField();
-    //  }
-
-    // homeProvider.updateUserNewFCM();
 
     super.dispose();
   }
@@ -50,8 +42,7 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     final shopProvider = Provider.of<ShopViewModel>(context, listen: true);
-    // final homeProvider = Provider.of<HomeViewModel>(context, listen: true);
-    //final itemInCart = shopProvider.checkCart(product);
+    final authProvider = Provider.of<AuthenticationProvider>(context, listen: true);
     return Scaffold(
       body: Padding(
         padding: safeAreaPadding,
@@ -66,33 +57,37 @@ class _ShopScreenState extends State<ShopScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      
-                      horizontalSpaceMedium,
+                      horizontalSpaceLarge,
+                      horizontalSpaceTiny,
                       const HeaderWidget(heading: "Shop"),
-                      IconButton(
-                        onPressed: () {
-                          // Navigator.of(context).push(MaterialPageRoute(builder:(context) {
-                          //   return FavouriteScreen();
-                          // },));
-                          // pushNewScreen(
-                          //   context,
-                          //   screen: const OrderScreen(),
-                          //   withNavBar:
-                          //       false, // OPTIONAL VALUE. True by default.
-                          //   pageTransitionAnimation:
-                          //       PageTransitionAnimation.slideUp,
-                          // );
-                        },
-                        icon: const Icon(
-                          Icons.person,
-                          color: AppColor.kGreyNeutral,
-                          size: 25,
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              authProvider.signOutUserFunction();
+                            },
+                            icon: const Icon(
+                              Icons.person,
+                              color: AppColor.kPrimaryColor,
+                              size: 25,
+                            ),
+                          ), IconButton(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (_){return const FavouriteScreen();}));
+                            },
+                            icon: const Icon(
+                              IconlyBold.heart,
+                              color: AppColor.kPrimaryColor,
+                              size: 25,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                   verticalSpaceTiny,
-                  PPSearchBox(
+                  TZSearchBox(
                     onChanged: (value) => shopProvider.searchListState(value),
                     hintText: 'Search',
                     textEditingController: searchController,
@@ -108,9 +103,7 @@ class _ShopScreenState extends State<ShopScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           if (shopProvider.isSearching == false) ...[
-                            PPShopCarouselWidget(
-                              // bannerModel: homeProvider.bannerList,
-                            ),
+                            const TZShopCarouselWidget(),
                             verticalSpaceMedium,
                           ],
                           Text(
@@ -126,7 +119,8 @@ class _ShopScreenState extends State<ShopScreen> {
                                 )
                               : shopProvider.error == true
                                   ? Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         verticalSpaceLarge,
                                         const Center(
@@ -165,12 +159,11 @@ class _ShopScreenState extends State<ShopScreen> {
                                             mainAxisSpacing: 16,
                                             crossAxisSpacing: 16,
                                             mainAxisExtent: 244.5,
-                                            //childAspectRatio: 0.60.h,
                                           ),
                                           itemBuilder: (context, index) {
                                             var product =
                                                 shopProvider.productList[index];
-                                            return PPShopProductCard(
+                                            return TZShopProductCard(
                                                 product: product);
                                           }),
                         ],

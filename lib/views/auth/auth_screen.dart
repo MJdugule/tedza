@@ -46,15 +46,7 @@ class _AuthScreenState extends State<AuthScreen>
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(
-              //     left: kPaddingS,
-              //     right: kPaddingFOUR,
-              //   ),
-              //   child: Image.asset(kSplashTwo, color: AppColor.kGreyNeutral.shade100,
-              //       width: kWidth(170, context), height: kHeight(60, context)),
-              // ),
-              //  SizedBox(height: kSpaceXXS,),
+              
               verticalSpaceMedium,
               Container(
                 padding: const EdgeInsets.only(
@@ -72,7 +64,7 @@ class _AuthScreenState extends State<AuthScreen>
                   onTap: (index){
                     authenticationProvider.clearFormData();
                   },
-                  tabs: [
+                  tabs: const [
                     Tab(
                       text: "Login",
                       // height: kHeight(59, context),

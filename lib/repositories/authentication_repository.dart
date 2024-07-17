@@ -13,17 +13,7 @@ class AuthenticationRepository {
     return NetworkService().signInTheUser(authUser);
   }
 
-  Future submitPasswordForForgotPassword(email, AuthUser authUser, password, confirmPassword,) {
-    return NetworkService().submitPasswordForForgotPassword(email, authUser, password, confirmPassword, );
-  }
-  
-  Future changePassword(oldPassword, newPassword, confirmPassword,) {
-    return NetworkService().changePassword(
-      oldPassword,
-      newPassword,
-      confirmPassword,
-    );
-  }
+ 
 
   Future getCurrentUser(){
     return NetworkService().getCurrentUser();
@@ -32,21 +22,6 @@ class AuthenticationRepository {
   Future updateUserProfile(firstNmame, lastName, phoneNumber){
     return NetworkService().updateUserProfile(firstNmame, lastName, phoneNumber);
   }
-  Future updateUserFcmToken(token){
-    return NetworkService().updateUserFcmToken(token);
-  }
-
-  // Future validateOtpForForgotPassword(String email, String otp) {
-  //   return NetworkService().forgotPasswordOtpVerification(email, otp);
-  // }
-
-  // Future changePasswordForForgotPassword(String password) {
-  //   return NetworkService().forgotPasswordChange(password);
-  // }
-
-  // Future changePassword(String oldPassword, String newPassword, String userId) {
-  //   return NetworkService().changePassword(oldPassword, newPassword, userId);
-  // }
 
   Future signOutUser() {
     return NetworkService().logoutUser();

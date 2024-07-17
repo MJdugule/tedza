@@ -26,7 +26,7 @@ class APIPathHelper {
   String changePassword = 'https://perrypay.vercel.app/auth/change-password';
 
   //Shop
-  String getAllShopProduct = '${APIBase.developmentURL}/products';
+  String getAllShopProduct = 'https://fakestoreapi.com/products';
   String addToCart = '${APIBase.developmentURL}/cart/add';
   String removeFromCart = '${APIBase.developmentURL}/cart/remove';
   String dropFromCart = '${APIBase.developmentURL}/cart/drop';

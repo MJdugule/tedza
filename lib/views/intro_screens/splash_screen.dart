@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tedza/constants/constant.dart';
 import 'package:tedza/viewmodels/authentication_viewmodel.dart';
 import 'package:tedza/views/auth/auth_screen.dart';
 import 'package:tedza/views/shop/shop_screen.dart';
@@ -71,13 +72,11 @@ class _SplashScreen extends State<SplashScreen>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: size.height,
         width: size.width,
-        // decoration: const BoxDecoration(
-        //     image: DecorationImage(
-        //         image: AssetImage(kSplashBackground), fit: BoxFit.cover)),
-        child: Stack(
+       
+        child:  Stack(
           alignment: Alignment.center,
           children: [
             Column(
@@ -85,15 +84,11 @@ class _SplashScreen extends State<SplashScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // FadeSlideTransition(
-                //   additionalOffset: 0.0,
-                //   animation: animation,
-                //   child: Image.asset(
-                //     kSplashTwo,
-                //     height: 50,
-                //     fit: BoxFit.contain,
-                //   ),
-                // ),
+                FadeSlideTransition(
+                  additionalOffset: 0.0,
+                  animation: animation,
+                  child: const Text("TEDZA", style: kLargeTextStyleTwo, )
+                ),
               ],
             ),
           ],
@@ -112,8 +107,7 @@ class FadeSlideTransition extends StatelessWidget {
       {required this.animation,
       required this.additionalOffset,
       required this.child,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {

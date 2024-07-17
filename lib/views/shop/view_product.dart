@@ -34,7 +34,6 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
   @override
   Widget build(BuildContext context) {
     final shopProvider = Provider.of<ShopViewModel>(context, listen: true);
-    // final itemInCart = shopProvider.checkCart(widget.product.id);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -48,19 +47,10 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    PPBackButton(onPress: () {
+                    TZBackButton(onPress: () {
                       Navigator.pop(context);
                     }),
                     const HeaderWidget(heading: "Shop"),
-                    // PPCartWidget(onTap: () {
-                    //   pushNewScreen(
-                    //     context,
-                    //     screen: const CartScreen(),
-                    //     withNavBar: true, // OPTIONAL VALUE. True by default.
-                    //     pageTransitionAnimation:
-                    //         PageTransitionAnimation.slideUp,
-                    //   );
-                    // }),
                     horizontalSpaceMedium
                   ],
                 ),
@@ -80,7 +70,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.network(
-                                jsonDecode(widget.product.image[0])[0],
+                                widget.product.image,
                                 fit: BoxFit.cover,
                                 errorBuilder: (
                                   context,
@@ -99,22 +89,12 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                                           color: AppColor.kGreyNeutral.shade400,
                                           size: 30,
                                         ),
-                                        // Image.asset(
-                                        //   kSplashTwo,
-                                        //   color: AppColor.kGreyNeutral.shade300,
-                                        // ),
                                       ],
                                     ),
                                   );
                                 },
                                 frameBuilder: (context, child, frame,
                                     wasSynchronouslyLoaded) {
-                                  //     print(frame);
-                                  //     if (frame == 0) {
-                                  //   CircularProgressIndicator(
-                                  //     strokeWidth: 5,
-                                  //   );
-                                  // }
                                   return frame == null
                                       ? const SizedBox(
                                           height: 150,
@@ -130,7 +110,6 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                                 loadingBuilder:
                                     (context, child, loadingProgress) {
                                   if (loadingProgress == null) {
-                                    // print(loadingProgress.expectedTotalBytes);
                                     return child;
                                   } else {
                                     return SizedBox(
@@ -168,20 +147,11 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                                 widget.product.productName,
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
-                              PPShopPriceWidget(
+                              TZShopPriceWidget(
                                 price: widget.product.productPrice.toString(),
                               )
                             ],
                           ),
-                          // GestureDetector(
-                          //   onTap: () =>
-                          //       shopProvider.addToFavourite(widget.product),
-                          //   child: shopProvider.checkFavourite(widget.product)
-                          //       // selected
-                          //       ? const Icon(IconlyBold.heart,
-                          //           color: AppColor.kPrimaryColor)
-                          //       : const Icon(IconlyLight.heart),
-                          // )
                         ],
                       ),
                       verticalSpaceSmall,
@@ -197,85 +167,18 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                       verticalSpaceSmall,
-                      // Text(
-                      //   "Size",
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .labelMedium!
-                      //       .copyWith(fontSize: 14, color: kBlack),
-                      // ),
-                      // verticalSpaceSmall,
-                      // Wrap(
-                      //   spacing: 8,
-                      //   runSpacing: 12,
-                      //   children: [
-                      //     ...widget.product.productSize.map((size) {
-                      //       return PPShopSizeItem(
-                      //         sizeText: size,
-                      //         isActive: selectedSize == size ? true : false,
-                      //         onPress: () =>
-                      //             setState(() => selectedSize = size),
-                      //       );
-                      //     })
-                      //   ],
-                      // ),
-                      // verticalSpaceSmall,
-                      // Text(
-                      //   "Color",
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .labelMedium!
-                      //       .copyWith(fontSize: 14, color: kBlack),
-                      // ),
-                      // verticalSpaceSmall,
-                      Row(
-                        children: [
-                          const Expanded(
-                            child: Wrap(
-                              spacing: 8,
-                              runSpacing: 12,
-                              children: [
-                                // ...widget.product.productColors.map((color) {
-                                // var  getColor = "0xFF";
-                                // var newColor = color.toString();
-                                // var theColor = getColor+newColor;
-                                //   print(int.parse(theColor));
-                                //   return PPShopColorDot(
-                                //     color: Color((0xFF+color).toInt()),
-                                //     isActive:
-                                //         selectedColor == color ? true : false,
-                                //     onPress: () =>
-                                //         setState(() => selectedColor = color),
-                                //   );
-                                // })
-                              ],
-                            ),
-                          ),
-                          
-                               SizedBox(
-                                  width: 120,
-                                  child: PPShopProductButton(
-                                    active:  true,
-                                    isLoading: isLoading,
-                                    textColor: AppColor.kWhiteColor,
-                                    buttonColor: AppColor.kPrimaryColor,
-                                    width: double.infinity,
-                                    height: 35,
-                                    text: "Add to Cart",
-                                    pressState: () async {
-                                      //  if (selectedSize == null ) {
-                                      //   PPSnackBarUtilities().showSnackBar(
-                                      //       message:
-                                      //           "Please select a color and size to add to cart",
-                                      //       snackbarType: SNACKBARTYPE.info);
-                                      //   return;
-                                      // }
-                                      
-                                      // shopProvider.addToCart(widget.product.id);
-                                    },
-                                  ),
-                                ),
-                        ],
+                      SizedBox(
+                        width: 120,
+                        child: TZShopProductButton(
+                          active: true,
+                          isLoading: isLoading,
+                          textColor: AppColor.kWhiteColor,
+                          buttonColor: AppColor.kPrimaryColor,
+                          width: double.infinity,
+                          height: 35,
+                          text: "Add to Cart",
+                          pressState: () async {},
+                        ),
                       ),
                       verticalSpaceMedium,
                       Column(
@@ -290,7 +193,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                           ),
                           GridView.builder(
                               shrinkWrap: true,
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 30),
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: shopProvider.productList.length,
                               gridDelegate:
@@ -303,7 +206,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                                       ),
                               itemBuilder: (context, index) {
                                 var product = shopProvider.productList[index];
-                                return PPShopProductCard(product: product);
+                                return TZShopProductCard(product: product);
                               }),
                         ],
                       ),

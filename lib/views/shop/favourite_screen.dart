@@ -15,19 +15,18 @@ class FavouriteScreen extends StatefulWidget {
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
-
   @override
   Widget build(BuildContext context) {
     final shopProvider = Provider.of<ShopViewModel>(context, listen: true);
     return Scaffold(
       body: Padding(
-         padding: safeAreaPadding,
+        padding: safeAreaPadding,
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                PPBackButton(onPress: () {
+                TZBackButton(onPress: () {
                   Navigator.pop(context);
                 }),
                 // const Spacer(flex: 2,),
@@ -43,34 +42,13 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                           IconlyBold.heart,
                           color: AppColor.kPrimaryColor,
                         )),
-                    // IconButton(
-                    //     onPressed: () {
-                    //       pushNewScreen(
-                    //         context,
-                    //         screen: const CartScreen(),
-                    //         withNavBar:
-                    //             true, // OPTIONAL VALUE. True by default.
-                    //         pageTransitionAnimation:
-                    //             PageTransitionAnimation.slideUp,
-                    //       );
-                    //     },
-                    //     icon: Container(
-                    //         padding: const EdgeInsets.all(8),
-                    //         decoration: const BoxDecoration(
-                    //           color: kWhiteTwo,
-                    //           shape: BoxShape.circle,
-                    //         ),
-                    //         child: const Icon(
-                    //           Icons.shopping_cart_outlined,
-                    //           size: 22,
-                    //         ))),
+                
                   ],
                 ),
               ],
             ),
             Expanded(
-              child: ListView(
-                children: [
+              child: ListView(children: [
                 verticalSpaceTiny,
                 ListView.builder(
                   shrinkWrap: true,
@@ -83,10 +61,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                     );
                   },
                 ),
-                // PPShopCartProductCard(
-                //   product: pp,
-                //   cart: false,
-                // ),
+                
                 verticalSpaceLarge
               ]),
             ),

@@ -3,27 +3,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconly/iconly.dart';
 import 'package:tedza/constants/constant.dart';
 
-class PPSearchBox extends StatefulWidget {
+class TZSearchBox extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final bool? isEnabled;
   final String? hintText;
   final TextEditingController textEditingController;
   final VoidCallback clearField;
 
-  const PPSearchBox(
+  const TZSearchBox(
       {this.onChanged,
       this.hintText,
       this.isEnabled,
-      Key? key,
+      super.key,
       required this.textEditingController,
-      required this.clearField})
-      : super(key: key);
+      required this.clearField});
 
   @override
-  State<PPSearchBox> createState() => _BPSearchBoxState();
+  State<TZSearchBox> createState() => _BPSearchBoxState();
 }
 
-class _BPSearchBoxState extends State<PPSearchBox> {
+class _BPSearchBoxState extends State<TZSearchBox> {
   @override
   Widget build(BuildContext context) {
     return Container(

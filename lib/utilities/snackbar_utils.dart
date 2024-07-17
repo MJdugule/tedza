@@ -5,8 +5,8 @@ import 'package:tedza/main.dart';
 
 enum SNACKBARTYPE { error, warning, info, success }
 
-class PPSnackBarUtilities {
-  PPSnackBarUtilities();
+class TZSnackBarUtilities {
+  TZSnackBarUtilities();
 
   showSnackBar({required String message, required SNACKBARTYPE snackbarType}) {
     scaffoldKey.currentState!.hideCurrentSnackBar();

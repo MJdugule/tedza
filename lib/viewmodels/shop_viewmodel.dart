@@ -4,8 +4,6 @@ import 'package:tedza/repositories/shop_respository.dart';
 import 'package:tedza/utilities/snackbar_utils.dart';
 
 class ShopViewModel extends ChangeNotifier {
-  String? _price = "";
-  String? get price => _price;
   String _searchText = "";
 
   List<PPProductModel> _productList = [];
@@ -65,20 +63,6 @@ class ShopViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  addToCart(String id) async {
-    final response = await shopRepository.addToCart(id);
-    return response;
-  }
-
-  removeFromCart(id) async {
-    // print(id);
-    final response = await shopRepository.removeFromCart(id);
-    //  notifyListeners();
-    return response;
-  }
-
- 
-
   addToFavourite(PPProductModel product) {
     if (!_favouriteList.any((element) => element.id == product.id)) {
       _favouriteList.add(product);
@@ -112,6 +96,7 @@ class ShopViewModel extends ChangeNotifier {
       setLoading(false, false);
       List<PPProductModel> allProductList = [];
       for (var item in response) {
+        print(response);
         PPProductModel ppProductModel = PPProductModel.fromJson(item);
         allProductList.add(ppProductModel);
         filteredList.add(ppProductModel);
@@ -125,31 +110,12 @@ class ShopViewModel extends ChangeNotifier {
     return response;
   }
 
-  // Future getCartProduct() async {
-  //   // setLoading(true);
-  //   final response = await shopRepository.getCartProduct();
-  //   if (response != false) {
-  //     List<PPCartProductModel> allCartList = [];
-  //     _cartList.clear();
-  //     for (var item in response['result']) {
-  //       PPCartProductModel ppProductModel = PPCartProductModel.fromJson(item);
-  //       allCartList.add(ppProductModel);
-  //       _cartList = allCartList;
-  //     }
-  //   }
-  //   // setLoading(false);
-  //   notifyListeners();
-  //   return response;
-  // } 
-
-   void showError(String message) {
-    PPSnackBarUtilities().showSnackBar(
+  void showError(String message) {
+    TZSnackBarUtilities().showSnackBar(
       message: message,
       snackbarType: SNACKBARTYPE.error,
     );
   }
-
- 
 
   // bool get isFavourite{
   //   return checkFavourite(product)

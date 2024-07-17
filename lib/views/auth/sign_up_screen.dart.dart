@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
 import 'package:tedza/constants/constant.dart';
@@ -103,8 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textInputAction: TextInputAction.next,
               ),
               verticalSpaceTiny,
-           
-            
+
               TZPasswordField(
                 obscureText: true,
                 hintText: "Password",
@@ -176,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         FocusScope.of(context).unfocus();
 
                         if (!authenticationProvider.isValidSignUp) {
-                          PPSnackBarUtilities().showSnackBar(
+                          TZSnackBarUtilities().showSnackBar(
                               message: "Please complete form to register",
                               snackbarType: SNACKBARTYPE.error);
                           return;

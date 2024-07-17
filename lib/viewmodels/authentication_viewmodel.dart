@@ -24,7 +24,7 @@ class AuthenticationProvider extends ChangeNotifier {
   ValidationModel _otp = ValidationModel(value: null, error: null);
   AuthenticationRepository authenticationRepository =
       AuthenticationRepository();
-  AuthUser _authenticationUser = AuthUser();
+  final AuthUser _authenticationUser = AuthUser();
   String? _avatar;
 
   AuthUser get authenticationUser => _authenticationUser;
@@ -107,26 +107,30 @@ class AuthenticationProvider extends ChangeNotifier {
 
   void validateOldPassword(String passwordText) {
     if (passwordText.isEmpty) {
-    _oldPassword = ValidationModel(value: null, error: kEmptyPasswordError);
+      _oldPassword = ValidationModel(value: null, error: kEmptyPasswordError);
     } else if (passwordText.length < 8) {
-      _oldPassword = ValidationModel(value: null, error: "Password must be up to 8 characters");
-    }else if (!passwordText.contains(regexNumber, 0)) {
-      _oldPassword = ValidationModel(value: null, error: "Password must contain a number");
-    }else if (!passwordText.contains(regexUpperCase, 0)) {
-      _oldPassword = ValidationModel(value: null, error: "Password must have an upper case character");
-    }else if (!passwordText.contains(regexSpecialCharacter)) {
-      _oldPassword = ValidationModel(value: null, error: "Password must have contain a special character");
+      _oldPassword = ValidationModel(
+          value: null, error: "Password must be up to 8 characters");
+    } else if (!passwordText.contains(regexNumber, 0)) {
+      _oldPassword =
+          ValidationModel(value: null, error: "Password must contain a number");
+    } else if (!passwordText.contains(regexUpperCase, 0)) {
+      _oldPassword = ValidationModel(
+          value: null, error: "Password must have an upper case character");
+    } else if (!passwordText.contains(regexSpecialCharacter)) {
+      _oldPassword = ValidationModel(
+          value: null, error: "Password must have contain a special character");
     } else {
       _oldPassword = ValidationModel(value: passwordText, error: null);
     }
-   
+
     notifyListeners();
   }
 
   void validateSignInPassword(String passwordText) {
     if (passwordText.isEmpty) {
-     _password = ValidationModel(value: null, error: kEmptyPasswordError);
-    }  else if (passwordText.length < 8) {
+      _password = ValidationModel(value: null, error: kEmptyPasswordError);
+    } else if (passwordText.length < 8) {
       _password = ValidationModel(
           value: null, error: "Password must be up to 8 characters");
     } else if (!passwordText.contains(regexNumber, 0)) {
@@ -135,10 +139,7 @@ class AuthenticationProvider extends ChangeNotifier {
     } else if (!passwordText.contains(regexUpperCase, 0)) {
       _password = ValidationModel(
           value: null, error: "Password must have an upper case character");
-    } else if (!passwordText.contains(regexSpecialCharacter)) {
-      _password = ValidationModel(
-          value: null, error: "Password must have contain a special character");
-    } else {
+    }  else {
       _password = ValidationModel(value: passwordText, error: null);
     }
     notifyListeners();
@@ -302,28 +303,11 @@ class AuthenticationProvider extends ChangeNotifier {
         password: password.value.toString().trim(),
         firstName: firstName.value.toString().trim(),
         lastName: lastName.value.toString().trim());
-        // phoneNumber: phoneNumber.value.toString().trim());
+    // phoneNumber: phoneNumber.value.toString().trim());
     final response = await authenticationRepository.signUpTheUser(authUser);
 
     if (response == true) {
-      print(response);
       await submitDataForSignIn();
-    //   final response = await authenticationRepository.signInTheUser(authUser);
-    //    if (response == true) {
-    //   setLoading(false);
-    //  print("signin");
-    // } else {
-    //   setLoading(false);
-    // }
-      // notificationRepository.getNotificationToken().then((token) {
-      //   //  print(token);
-      //   if (token != null) {
-      //     updateUserFcmToken(token);
-      //   }
-      // });
-
-      // navigateToDashBoard();
-      // changeVerificationFormStateToOtp();
     }
 
     setLoading(false);
@@ -333,7 +317,6 @@ class AuthenticationProvider extends ChangeNotifier {
 
   //Sign In
   Future submitDataForSignIn() async {
-    // print('DATA: ${email.value}, ${password.value}');
     AuthUser authUser = AuthUser(
       email: email.value.toString(),
       password: password.value.toString(),
@@ -343,7 +326,6 @@ class AuthenticationProvider extends ChangeNotifier {
     if (response == true) {
       setLoading(false);
       navigateToHome();
-     
     } else {
       setLoading(false);
     }
@@ -378,22 +360,17 @@ class AuthenticationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
- 
-
 //SignOut
   Future signOutUserFunction() async {
     setLoading(true);
-    final status = await authenticationRepository.signOutUser();
-    // print(status);
-    if (status == true) {
+    // final status = await authenticationRepository.signOutUser();
+    // // print(status);
+    // if (status == true) {
       clearAppDetaills();
-    }
+    // }
     setLoading(false);
     notifyListeners();
   }
-
 
   Future<List<String>> getUserAuthKeys() async {
     List<String> tokens = await UserSecureStorage.getUserCredentials();
@@ -492,7 +469,7 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   void showErrorMessage(String message) {
-    PPSnackBarUtilities().showSnackBar(
+    TZSnackBarUtilities().showSnackBar(
       message: message,
       snackbarType: SNACKBARTYPE.error,
     );

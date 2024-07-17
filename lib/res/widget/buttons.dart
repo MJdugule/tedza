@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconly/iconly.dart';
 import 'package:tedza/constants/constant.dart';
 
-
-class PPBackButton extends StatelessWidget {
-  const PPBackButton({
+class TZBackButton extends StatelessWidget {
+  const TZBackButton({
     super.key,
     required this.onPress,
   });
@@ -161,25 +159,3 @@ class PPBackNextButton extends StatelessWidget {
   }
 }
 
-class PPDropDownIcon extends StatelessWidget {
-  const PPDropDownIcon({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(8),
-        // decoration: BoxDecoration(
-        //   color: PrefUtils.getUserThemePreference() == true
-        //       ? kMainColorFade
-        //       : kMainColorLight.withOpacity(0.13),
-        //   shape: BoxShape.circle,
-        // ),
-        child: const Icon(
-          FontAwesomeIcons.chevronDown,
-          color: kDarkGrey,
-          size: 14,
-        ));
-  }
-}

@@ -11,6 +11,7 @@ class ThemeProvider extends ChangeNotifier {
   //bool get isDarkMode => themeMode == ThemeMode.dark;
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
+      // ignore: deprecated_member_use
       return SchedulerBinding.instance.window.platformBrightness ==
           Brightness.dark;
     } else {

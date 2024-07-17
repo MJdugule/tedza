@@ -9,27 +9,26 @@ import 'package:tedza/utilities/snackbar_utils.dart';
 import 'package:tedza/utilities/user_secure_storage.dart';
 import 'package:tedza/viewmodels/authentication_viewmodel.dart';
 
-
 class ApiService {
   Future<Either<dynamic, dynamic>> apiInterceptor(Function function) async {
     await InternetChecker().checkInternetStatus();
     try {
       var response = await function.call();
-      print(response.body);
       final errorMessage =
           ApiException.fromResponse(response.statusCode, response);
       if (errorMessage.toString() != "null") {
-        if (errorMessage.toString().toLowerCase() == "jwt expired" || errorMessage.toString().toLowerCase() == "invalid or expired token") {
+        if (errorMessage.toString().toLowerCase() == "jwt expired" ||
+            errorMessage.toString().toLowerCase() ==
+                "invalid or expired token") {
           AuthenticationProvider().clearAppDetaills();
           return Left(response);
         }
         showError(errorMessage.toString());
-        return Left(response);  
-      }else{
-      //  checkAndStoreToken(response);
-         return Right(response);
+        return Left(response);
+      } else {
+        //  checkAndStoreToken(response);
+        return Right(response);
       }
-     
     } on SocketException {
       showError(kInternetErrorMessage);
       return const Left(null);
@@ -39,24 +38,23 @@ class ApiService {
     } on FormatException {
       showError("An error occurred");
       return const Left(null);
-    } on HandshakeException{
+    } on HandshakeException {
       showError("An Internet error occurred, please try again later");
       return const Left(null);
-    } catch (e){
-      print(e);
-       showError("Oops, something went wrong");
+    } catch (e) {
+      showError("Oops, something went wrong");
       return const Left(null);
     }
-    
   }
-  
-  Future<Either<dynamic, dynamic>> multipartApiInterceptor(Function function) async {
+
+  Future<Either<dynamic, dynamic>> multipartApiInterceptor(
+      Function function) async {
     await InternetChecker().checkInternetStatus();
     try {
       var response = await function.call();
       var errorResponse = await response.stream.bytesToString();
-      final errorMessage =
-          ApiException.fromMultipartResponse(response.statusCode, errorResponse);
+      final errorMessage = ApiException.fromMultipartResponse(
+          response.statusCode, errorResponse);
       if (errorMessage.toString() != "null") {
         if (errorMessage.toString().toLowerCase() == "jwt expired") {
           AuthenticationProvider().signOutUserFunction();
@@ -64,11 +62,10 @@ class ApiService {
         }
         showError(errorMessage.toString());
         return Left(response);
-      }else{
-      //  checkAndStoreToken(response);
-         return Right(response);
+      } else {
+        //  checkAndStoreToken(response);
+        return Right(response);
       }
-     
     } on SocketException {
       showError(kInternetErrorMessage);
       return const Left(null);
@@ -78,25 +75,24 @@ class ApiService {
     } on FormatException {
       showError("sorry, An error occurred");
       return const Left(null);
-    } on HandshakeException{
+    } on HandshakeException {
       showError("An Internet error occurred, please try again later");
       return const Left(null);
-    } catch (e){
-       showError("Oops, something went wrong");
+    } catch (e) {
+      showError("Oops, something went wrong");
       return const Left(null);
-      
     }
-    
   }
 
-  checkAndStoreToken(responses) async{
-    if (json.decode(responses.body)["result"] != null){
-       if (json.decode(responses.body)["result"]["token"] != null &&
+  checkAndStoreToken(responses) async {
+    if (json.decode(responses.body)["result"] != null) {
+      if (json.decode(responses.body)["result"]["token"] != null &&
           json.decode(responses.body)["result"]["refreshToken"] != null) {
         await UserSecureStorage.setUserCredentials(
             json.decode(responses.body)["result"]["token"].toString(),
             json.decode(responses.body)["result"]["refreshToken"].toString());
-      }}
+      }
+    }
   }
 
   // checkForExpiredToken(response){
@@ -136,7 +132,7 @@ class ApiService {
   // }
 
   void showError(String message) {
-    PPSnackBarUtilities().showSnackBar(
+    TZSnackBarUtilities().showSnackBar(
       message: message,
       snackbarType: SNACKBARTYPE.error,
     );

@@ -10,123 +10,123 @@ import 'package:tedza/res/widget/app_spinner.dart';
 import 'package:tedza/viewmodels/shop_viewmodel.dart';
 import 'package:tedza/views/shop/view_product.dart';
 
-class PPShopCarouselWidget extends StatefulWidget {
-  const PPShopCarouselWidget({super.key, });
+class TZShopCarouselWidget extends StatefulWidget {
+  const TZShopCarouselWidget({
+    super.key,
+  });
 
   @override
-  State<PPShopCarouselWidget> createState() => _PPShopCarouselWidgetState();
+  State<TZShopCarouselWidget> createState() => _TZShopCarouselWidgetState();
 }
 
-class _PPShopCarouselWidgetState extends State<PPShopCarouselWidget> {
+class _TZShopCarouselWidgetState extends State<TZShopCarouselWidget> {
   CarouselController buttonCarouselController = CarouselController();
   int _current = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
-            children: [
-              CarouselSlider(
-                items: carouselList
-                    .toList()
-                    .map<Widget>((e) {
-                  //  return e.image == null ? Image.asset(kSplashTwo):
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(e.toString(),
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover, errorBuilder: (
-                      context,
-                      child,
-                      frame,
-                    ) {
-                      return SizedBox(
-                        height: 150,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Image.asset(
-                            //   kSplashTwo,
-                            //   color: AppColor.kGreyNeutral.shade300,
-                            // ),
-                          ],
-                        ),
-                      );
-                    }, frameBuilder:
-                            (context, child, frame, wasSynchronouslyLoaded) {
-                      //     print(frame);
-                      //     if (frame == 0) {
-                      //   CircularProgressIndicator(
-                      //     strokeWidth: 5,
-                      //   );
-                      // }
-                      return frame == null
-                          ? const SizedBox(
-                              height: 150,
-                              //  width: 150,
-                              child: Center(
-                                child: SizedBox(
-                                    height: 23, width: 23, child: AppSpinner()),
-                              ),
-                            )
-                          : child;
-                    }, ),
+      children: [
+        CarouselSlider(
+          items: carouselList.toList().map<Widget>((e) {
+            //  return e.image == null ? Image.asset(kSplashTwo):
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                e.toString(),
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+                errorBuilder: (
+                  context,
+                  child,
+                  frame,
+                ) {
+                  return const SizedBox(
+                    height: 150,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Image.asset(
+                        //   kSplashTwo,
+                        //   color: AppColor.kGreyNeutral.shade300,
+                        // ),
+                      ],
+                    ),
                   );
-                }).toList(),
-                carouselController: buttonCarouselController,
-                options: CarouselOptions(
-                  onPageChanged: (index, reason) {
-                    //  print(index);
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                  autoPlay: true,
-                  enlargeCenterPage: true,
-                  viewportFraction: 1,
-                  aspectRatio: 16 / 9,
-                  initialPage: 1,
-                  autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-                  autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-                  // autoPlayInterval: const Duration(microseconds: 10),
-                ),
+                },
+                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                  //     print(frame);
+                  //     if (frame == 0) {
+                  //   CircularProgressIndicator(
+                  //     strokeWidth: 5,
+                  //   );
+                  // }
+                  return frame == null
+                      ? const SizedBox(
+                          height: 150,
+                          //  width: 150,
+                          child: Center(
+                            child: SizedBox(
+                                height: 23, width: 23, child: AppSpinner()),
+                          ),
+                        )
+                      : child;
+                },
               ),
-              verticalSpaceTiny,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: carouselList
-                    .asMap()
-                    .entries
-                    .map((entry) {
-                  return Container(
-                      width: _current == entry.key ? 9.0 : 9,
-                      height: 9.0,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 0.0, horizontal: 2.0),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          // borderRadius: BorderRadius.circular(4),
-                          color: _current == entry.key
-                              ? AppColor.kPrimaryColor
-                              : AppColor.kGreyNeutral.shade300));
-                }).toList(),
-              ),
-            ],
-          );
+            );
+          }).toList(),
+          carouselController: buttonCarouselController,
+          options: CarouselOptions(
+            onPageChanged: (index, reason) {
+              //  print(index);
+              setState(() {
+                _current = index;
+              });
+            },
+            autoPlay: true,
+            enlargeCenterPage: true,
+            viewportFraction: 1,
+            aspectRatio: 16 / 9,
+            initialPage: 1,
+            autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+            autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+            // autoPlayInterval: const Duration(microseconds: 10),
+          ),
+        ),
+        verticalSpaceTiny,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: carouselList.asMap().entries.map((entry) {
+            return Container(
+                width: _current == entry.key ? 9.0 : 9,
+                height: 9.0,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 2.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    // borderRadius: BorderRadius.circular(4),
+                    color: _current == entry.key
+                        ? AppColor.kPrimaryColor
+                        : AppColor.kGreyNeutral.shade300));
+          }).toList(),
+        ),
+      ],
+    );
   }
 }
 
-class PPShopProductCard extends StatefulWidget {
-  const PPShopProductCard({super.key, required this.product});
+class TZShopProductCard extends StatefulWidget {
+  const TZShopProductCard({super.key, required this.product});
   final PPProductModel product;
 
   @override
-  State<PPShopProductCard> createState() => _PPShopProductCardState();
+  State<TZShopProductCard> createState() => _TZShopProductCardState();
 }
 
-class _PPShopProductCardState extends State<PPShopProductCard> {
+class _TZShopProductCardState extends State<TZShopProductCard> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-        final shopProvider = Provider.of<ShopViewModel>(context, listen: true);
+    final shopProvider = Provider.of<ShopViewModel>(context, listen: true);
 
     return InkWell(
       onTap: () {
@@ -146,7 +146,8 @@ class _PPShopProductCardState extends State<PPShopProductCard> {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.network(
-                  jsonDecode(widget.product.image[0])[0],
+                  widget.product.image,
+                  // "jsonDecode(widget.product.image[0])[0]",
                   // widget.product.image.toList().first.toList().first,
                   errorBuilder: (
                     context,
@@ -234,7 +235,7 @@ class _PPShopProductCardState extends State<PPShopProductCard> {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     verticalSpaceTiny,
-                    PPShopPriceWidget(
+                    TZShopPriceWidget(
                         price: widget.product.productPrice.toString()),
                   ],
                 ),
@@ -249,20 +250,18 @@ class _PPShopProductCardState extends State<PPShopProductCard> {
             ],
           ),
           const Spacer(),
-         
-              PPShopProductButton(
-                  active: true,
-                  isLoading: isLoading,
-                  textColor: AppColor.kWhiteColor,
-                  buttonColor: AppColor.kPrimaryColor,
-                  width: double.infinity,
-                  height: 35,
-                  text: "Add to Cart",
-                  pressState: () async {
-                   
-                    // shopProvider.addToCart(widget.product.id);
-                  },
-                ),
+          TZShopProductButton(
+            active: true,
+            isLoading: isLoading,
+            textColor: AppColor.kWhiteColor,
+            buttonColor: AppColor.kPrimaryColor,
+            width: double.infinity,
+            height: 35,
+            text: "Add to Cart",
+            pressState: () async {
+              // shopProvider.addToCart(widget.product.id);
+            },
+          ),
           const Spacer()
         ],
       ),
@@ -270,8 +269,8 @@ class _PPShopProductCardState extends State<PPShopProductCard> {
   }
 }
 
-class PPShopPriceWidget extends StatelessWidget {
-  const PPShopPriceWidget({super.key, required this.price});
+class TZShopPriceWidget extends StatelessWidget {
+  const TZShopPriceWidget({super.key, required this.price});
   final String price;
 
   @override
@@ -279,7 +278,7 @@ class PPShopPriceWidget extends StatelessWidget {
     return RichText(
       overflow: TextOverflow.ellipsis,
       text: TextSpan(
-          text: "₦",
+          text: "\$",
           style: GoogleFonts.nunito(
               fontSize: 14,
               color: AppColor.kPrimaryColor,
@@ -297,7 +296,7 @@ class PPShopPriceWidget extends StatelessWidget {
   }
 }
 
-class PPShopProductButton extends StatelessWidget {
+class TZShopProductButton extends StatelessWidget {
   final String? text;
   final bool active, isLoading;
   final VoidCallback? pressState;
@@ -305,7 +304,7 @@ class PPShopProductButton extends StatelessWidget {
   final double width;
   final double? height;
   final double? textSize;
-  const PPShopProductButton(
+  const TZShopProductButton(
       {super.key,
       this.text,
       required this.active,
@@ -400,8 +399,8 @@ class _PPShopCartProductCardState extends State<PPShopCartProductCard> {
                 border: Border.all(color: AppColor.kPrimaryColor)),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  jsonDecode(widget.product.image[0])[0],
+                child: Image.network(
+                  widget.product.image,
                   height: size.height * 0.15,
                   width: size.width * 0.3,
                   fit: BoxFit.cover,
@@ -427,7 +426,7 @@ class _PPShopCartProductCardState extends State<PPShopCartProductCard> {
                     GestureDetector(
                       onTap: () {
                         if (widget.cart == true) {
-                          shopProvider.removeFromCart(widget.product);
+                          // shopProvider.removeFromCart(widget.product);
                         } else {
                           shopProvider.removeFromFavorite(widget.product);
                         }
@@ -463,23 +462,21 @@ class _PPShopCartProductCardState extends State<PPShopCartProductCard> {
                       ),
                     ),
                     if (widget.cart == false)
-                      PPShopProductButton(
+                      TZShopProductButton(
                           width: 80,
                           height: 30,
-                          pressState: (){},
-                              // shopProvider.checkCart(widget.product) == true
-                              //     ? () {}
-                              //     : () {
-                              //         shopProvider.addToCart(widget.product);
-                              //       },
-                          active:  true,
-                              
+                          pressState: () {},
+                          // shopProvider.checkCart(widget.product) == true
+                          //     ? () {}
+                          //     : () {
+                          //         shopProvider.addToCart(widget.product);
+                          //       },
+                          active: true,
                           isLoading: false,
                           textColor: AppColor.kWhiteColor,
                           buttonColor: AppColor.kPrimaryColor,
                           textSize: 10,
-                          text:  "Add to Cart"),
-                  
+                          text: "Add to Cart"),
                   ],
                 ),
               ],
