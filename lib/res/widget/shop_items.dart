@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,21 +44,13 @@ class _TZShopCarouselWidgetState extends State<TZShopCarouselWidget> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Image.asset(
-                        //   kSplashTwo,
-                        //   color: AppColor.kGreyNeutral.shade300,
-                        // ),
+                        
                       ],
                     ),
                   );
                 },
                 frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                  //     print(frame);
-                  //     if (frame == 0) {
-                  //   CircularProgressIndicator(
-                  //     strokeWidth: 5,
-                  //   );
-                  // }
+                  
                   return frame == null
                       ? const SizedBox(
                           height: 150,
@@ -89,7 +80,6 @@ class _TZShopCarouselWidgetState extends State<TZShopCarouselWidget> {
             initialPage: 1,
             autoPlayCurve: Curves.fastLinearToSlowEaseIn,
             autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-            // autoPlayInterval: const Duration(microseconds: 10),
           ),
         ),
         verticalSpaceTiny,
@@ -103,7 +93,6 @@ class _TZShopCarouselWidgetState extends State<TZShopCarouselWidget> {
                     const EdgeInsets.symmetric(vertical: 0.0, horizontal: 2.0),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    // borderRadius: BorderRadius.circular(4),
                     color: _current == entry.key
                         ? AppColor.kPrimaryColor
                         : AppColor.kGreyNeutral.shade300));
@@ -147,8 +136,7 @@ class _TZShopProductCardState extends State<TZShopProductCard> {
                 borderRadius: BorderRadius.circular(16),
                 child: Image.network(
                   widget.product.image,
-                  // "jsonDecode(widget.product.image[0])[0]",
-                  // widget.product.image.toList().first.toList().first,
+                  
                   errorBuilder: (
                     context,
                     child,
@@ -165,22 +153,14 @@ class _TZShopProductCardState extends State<TZShopProductCard> {
                             color: AppColor.kGreyNeutral.shade400,
                             size: 30,
                           ),
-                          // Image.asset(
-                          //   kSplashTwo,
-                          //   color: AppColor.kGreyNeutral.shade300,
-                          // ),
+                          
                         ],
                       ),
                     );
                   },
                   frameBuilder:
                       (context, child, frame, wasSynchronouslyLoaded) {
-                    //     print(frame);
-                    //     if (frame == 0) {
-                    //   CircularProgressIndicator(
-                    //     strokeWidth: 5,
-                    //   );
-                    // }
+                   
                     return frame == null
                         ? const SizedBox(
                             height: 150,
@@ -193,7 +173,6 @@ class _TZShopProductCardState extends State<TZShopProductCard> {
                   },
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) {
-                      // print(loadingProgress.expectedTotalBytes);
                       return child;
                     } else {
                       return SizedBox(
@@ -329,16 +308,12 @@ class TZShopProductButton extends StatelessWidget {
                   onPressed: pressState,
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    // padding: const EdgeInsets.symmetric(
-                    //     vertical: kPaddingMM, horizontal: kPaddingMM),
+                   
                     backgroundColor: active
                         ? buttonColor
                         : AppColor.kGreyNeutral.shade300.withOpacity(.5),
                     shape: RoundedRectangleBorder(
-                        // side: BorderSide(
-                        //     color:active ? buttonColor : AppColor.kGreyNeutral.shade300.withOpacity(.5),
-                        //     width: kPaddingTwo,
-                        //     style: BorderStyle.solid),
+                       
                         borderRadius: BorderRadius.circular(kPaddingSS)),
                   ),
                   child: Center(
@@ -352,12 +327,7 @@ class TZShopProductButton extends StatelessWidget {
                     ),
                   )),
             ),
-      // decoration: BoxDecoration(boxShadow: [
-      //   BoxShadow(
-      //       offset: Offset(0, 4),
-      //       color: kMainColorDark.withOpacity(0.25),
-      //       blurRadius: 20)
-      // ]),
+    
     );
   }
 }
